@@ -1,0 +1,30 @@
+Step 1:
+    create a folder called .github, 
+    inside .github, create a folder called workflows
+
+step 2:
+    Create a .yaml file which will contain the workflows
+
+step 3:
+    In the workflows:
+        - Assign a workflow name
+        - Specify a trigger on the branch
+        - Add a runner
+        - create a job with the following steps
+            - chechout code using prebuilt code actions
+            - Set up node on the runner with a prebuilt actions
+            - run tests
+
+
+
+
+
+After that push it to github and 
+git add .
+git commit -m "added workflows"
+git push -u origin main
+
+Go to github
+github actions
+open workflows
+when you see added workflows, meanig your actions has workflows
