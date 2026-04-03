@@ -1,14 +1,9 @@
-# Create a name
 name: ci
 
-# Trigger 
 on:
   push:
     branches: [main]
-  # pull_request:
-  #   branches: [main]
-
-# create a job
+ 
 jobs:
   build:
     runs-on: ubuntu-latest, windows-latest
@@ -16,7 +11,7 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v6
 
-      - name: Set up node.jobs
+      - name: Set up node
         uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -27,3 +22,6 @@ jobs:
 
         name: run tests
         run: npm test
+
+        - name: linter
+          run: npm run lint
