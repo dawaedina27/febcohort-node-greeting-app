@@ -14,13 +14,13 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v4
 
-      - name: Set up node
+      - name: set up node
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
 
-      - name: run ci
+      - name: install deps
         run: npm ci
 
       - name: run tests
@@ -36,14 +36,14 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v4
 
-      - name: Set up node
+      - name: set up node
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
 
-      - name: run ci
+      - name: install deps
         run: npm ci
 
-      - name: linter
+      - name: run lint
         run: npm run lint
