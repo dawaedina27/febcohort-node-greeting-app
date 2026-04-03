@@ -4,8 +4,7 @@ on:
   push:
     branches: [main]
  
-jobs:
-  build:
+test: 
     runs-on: ubuntu-latest, windows-latest
     steps:
       - name: checkout code
