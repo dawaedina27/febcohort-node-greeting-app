@@ -50,3 +50,46 @@ jobs:
 
       - name: run lint
         run: npm run lint
+
+
+
+  docker:
+    runs-on: ${{ matrix.os }}
+    needs: lint
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: set up docker bulidx
+        uses:docker/setup-buildx-actions@v4
+
+      - name: login to docker hub
+        uses: docker/login-actions@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          token: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: extract docker metadata
+        id: metadata
+        uses: docker/metadata-actionsv6
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_TOKEN }}
+          tags: |
+            type=sha,prefix=sha-,format=short
+            type=ref,event=branch
+            type=raw, value=latest,enable={{is_default_branch}}
+
+      - name: build and push docker images
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{steps.meta.outputs.tags}}
+          labels: ${{{steps.meta.outputs.labels}}
+          cache-from: type-gha
+          cache-to: typegha, mode=max
+
+  

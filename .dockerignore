@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+coverage
+.github
+*.test.js
+*.spec.js
+.eslintrc.json
+.eslintignore
+README.md
+.env
+.env.*
